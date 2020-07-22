@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ person.name }} -- {{ person.age }}</h2>
+        <h3>{{ person.favorite }}</h3>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <h3>{{ msg }}</h3>
+        <div v-text='person.name'></div>
+        <div v-text='msg'></div>
+        <div v-html='htmlStr'></div>
+        <input type="text" v-model='msg'>
+        <button v-on:click="handlerClick">点击按钮</button>
+        <br>
+        <br>
+        <div>
+            数量： 
+            <button v-on:click="sub">-</button>
+            {{num}}
+            <button v-on:click="add">+</button>
+        </div>
+    </div>
+    <script src="MVVM.js"></script>
+    <script>
+        // 数据一般挂载在vm上
+        // Object.defineProperty  给所有的对象上都加上get和set方法 观察数据变化 3.Watcher
+        // 
+        // vue中实现双向绑定  1.模板的编译 2.数据劫持 
+        let vm = new Vue({
+            el: '#app',
+            data: { 
+                num: 1,
+                person: {
+                    name: 'VUE',
+                    age: 18,
+                    favorite: '框架学习！'
+                },
+                msg: '学习手写Vue框架',
+                htmlStr: '<h3>Vue与TypeScript</h3>'
+            },
+            methods: {
+                handlerClick() {
+                    this.msg = 'React'
+                    this.person = {
+                        name: 'React',
+                        age: 99,
+                        favorite: '修改之后测试'
+                    }
+                },
+                add() {
+                    this.num++
+                },
+                sub() {
+                    if(this.num === 1) return
+                    this.num = this.num -1
+                }
+            }
+        })
+    </script>
+
+</html>
